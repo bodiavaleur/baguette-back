@@ -1,8 +1,10 @@
 import type { Express } from "express";
-import DictionaryRouter from "~routes/dictionary.router";
+import AuthRouter from "~routes/auth.router";
+import WordsRouter from "~routes/words.router";
 
 const RootRouter = (app: Express) => {
-  app.use(DictionaryRouter());
+  app.use(AuthRouter());
+  app.use(WordsRouter());
 };
 
 export default RootRouter;

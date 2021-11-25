@@ -5,9 +5,9 @@ export const AUTH_API = {
   REGISTER: `${BASE_URL}auth/register/`,
 };
 
-export const DICTIONARY_API = {
-  GET_WORDS: `${BASE_URL}dictionary/`,
-  ADD_WORD: `${BASE_URL}dictionary/add`,
-  DELETE_WORD: `${BASE_URL}dictionary/:id`,
-  GET_WORD_DETAILS: `${BASE_URL}dictionary/:id`,
+export const WORDS_API = {
+  GET_WORDS: `${BASE_URL}words/`,
+  ADD_WORD: `${BASE_URL}word/add`,
+  DELETE_WORD: `${BASE_URL}word/:id`,
+  GET_WORD_DETAILS: `${BASE_URL}word/:id`,
 };
