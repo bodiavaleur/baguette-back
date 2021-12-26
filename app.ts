@@ -1,24 +1,28 @@
 import "module-alias/register";
-import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import RootRouter from "~routes/root.router";
-import ErrorHandlerMiddleware from "~middleware/errorHandler.middleware";
+import errorHandler from "~middleware/errorHandler.middleware";
+import { config } from "~config/config";
 
-dotenv.config();
+import "~types/express";
+import "~utils/strategies/local";
+
+import PassportSession from "~utils/PassportSession";
 
 const app = express();
 
 app.use(express.json());
 
+PassportSession(app);
 RootRouter(app);
 
-app.use(ErrorHandlerMiddleware);
+app.use(errorHandler);
 
-app.listen(process.env.PORT, () => {
-  console.log(`[*] Server successfully started at: ${process.env.PORT}`);
+app.listen(config.port, () => {
+  console.log(`[*] Server successfully started at: ${config.port}`);
 });
 
-mongoose.connect(process.env.MONGODB_CLOUD_URL ?? "").then(() => {
+mongoose.connect(config.mongoCloudUrl).then(() => {
   console.log("[*] MongoDB database is connected");
 });

@@ -1,4 +1,11 @@
 # .ENV variables
 
+### General:
+
 `PORT=YOUR_PORT_HERE`
 `MONGODB_CLOUD_URL=YOUR_CLUSTER_URL_HERE`
+
+### Passport:
+
+`PASSPORT_SECRET="some secret word"`
+`PASSPORT_COOKIE_AGE_HOURS=1`

@@ -3,11 +3,12 @@ import jwt from "jsonwebtoken";
 import { Models } from "~config/models";
 import { ACCESS_TOKEN_EXPIRE_TIME, Token } from "~config/token";
 import type { UserDocument } from "~models/User/types";
+import { config } from "~config/config";
 
 const { User, Word } = Models;
 const { ObjectId } = mongoose.Schema.Types;
 
-const UserSchema = new mongoose.Schema({
+export const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
@@ -31,7 +32,7 @@ const UserSchema = new mongoose.Schema({
 UserSchema.methods.generateAccessToken = function () {
   const payload = { _id: this._id, type: Token.Access };
   const expiresIn = ACCESS_TOKEN_EXPIRE_TIME;
-  const jwtKey = process.env.JWT_SECRET ?? "";
+  const jwtKey = config.jwtSecret;
 
   return jwt.sign(payload, jwtKey, { expiresIn });
 };

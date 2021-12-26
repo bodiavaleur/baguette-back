@@ -1,16 +1,16 @@
 import type { Response } from "express";
-import { HttpStatusCode } from "~config/errors";
+import { HttpStatus } from "~config/errors";
 
 class ResponseServiceBase {
   success(res: Response, data: any) {
     res.json(data);
   }
 
-  error(res: Response, code: HttpStatusCode) {
+  error(res: Response, code: HttpStatus) {
     res.status(code).end();
   }
 
-  errorMessage(res: Response, code: HttpStatusCode, message: string) {
+  errorMessage(res: Response, code: HttpStatus, message: string) {
     res.status(code).json({ error: message });
   }
 }

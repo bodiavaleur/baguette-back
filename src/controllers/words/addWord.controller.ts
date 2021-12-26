@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 import UserModel from "~models/User";
 import ResponseService from "~utils/ResponseService";
-import { HttpStatusCode } from "~config/errors";
+import { HttpStatus } from "~config/errors";
 import WordModel from "~models/Word";
 
 const addWordController: RequestHandler = async (req, res, next) => {
@@ -17,7 +17,7 @@ const addWordController: RequestHandler = async (req, res, next) => {
     if (!user) {
       return ResponseService.errorMessage(
         res,
-        HttpStatusCode.NOT_FOUND,
+        HttpStatus.NOT_FOUND,
         "Cant find user"
       );
     }
