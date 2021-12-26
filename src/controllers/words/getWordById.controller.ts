@@ -1,25 +1,24 @@
 import { RequestHandler } from "express";
 import WordModel from "~models/Word";
-import ResponseService from "~utils/ResponseService";
+import Response from "~utils/Response";
 import { HttpStatus } from "~config/errors";
+import { WordsErrorStrings } from "~config/strings/words/errors";
 
-const getWordByIdController: RequestHandler = async (req, res, next) => {
+const { WordNotFound } = WordsErrorStrings;
+
+const getWordById: RequestHandler = async (req, res, next) => {
   try {
     const { wordId } = req.query;
     const word = await WordModel.findById(wordId);
 
     if (word) {
-      return ResponseService.success(res, word);
+      return Response.success(res, word);
     } else {
-      return ResponseService.errorMessage(
-        res,
-        HttpStatus.NOT_FOUND,
-        "Word does not exist"
-      );
+      return Response.errorMessage(res, HttpStatus.NOT_FOUND, WordNotFound);
     }
   } catch (err) {
     next(err);
   }
 };
 
-export default getWordByIdController;
+export default getWordById;

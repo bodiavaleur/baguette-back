@@ -1,14 +1,18 @@
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
-import { Models } from "~config/models";
+import { Collections, Models } from "~config/models";
 import { ACCESS_TOKEN_EXPIRE_TIME, Token } from "~config/token";
-import type { UserDocument } from "~models/User/types";
+import type { UserDocument } from "./types";
 import { config } from "~config/config";
 
 const { User, Word } = Models;
 const { ObjectId } = mongoose.Schema.Types;
 
 export const UserSchema = new mongoose.Schema({
+  _id: {
+    type: ObjectId,
+    auto: true,
+  },
   email: {
     type: String,
     required: true,
@@ -22,10 +26,6 @@ export const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-  },
-  dictionary: {
-    type: [ObjectId],
-    ref: Word,
   },
 });
 
@@ -41,6 +41,10 @@ UserSchema.methods.validatePassword = function (password) {
   return this.password === password;
 };
 
-const UserModel = mongoose.model<UserDocument>(User, UserSchema);
+const UserModel = mongoose.model<UserDocument>(
+  User,
+  UserSchema,
+  Collections.Users
+);
 
 export default UserModel;

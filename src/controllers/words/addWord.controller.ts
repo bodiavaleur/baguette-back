@@ -1,36 +1,38 @@
 import { RequestHandler } from "express";
-import UserModel from "~models/User";
-import ResponseService from "~utils/ResponseService";
+import Response from "~utils/Response";
 import { HttpStatus } from "~config/errors";
 import WordModel from "~models/Word";
+import DictionaryModel from "~models/Dictionary";
+import { DictionaryErrorString } from "~config/strings/dictionary/errors";
 
-const addWordController: RequestHandler = async (req, res, next) => {
+const { NotFound } = DictionaryErrorString;
+
+const addWord: RequestHandler = async (req, res, next) => {
   try {
-    const { userId, word, translation, image, example } = req.body;
-    const wordData = { word, translation, image, example, createdBy: userId };
+    const userId = req.user?._id;
+    const { dictionaryId, ...word } = req.body;
 
-    const newWord = await WordModel.create(wordData);
-    const user = await UserModel.findById({ _id: userId }).populate(
-      "dictionary"
-    );
+    const dictionary = await DictionaryModel.findOne({
+      _id: dictionaryId,
+      user: userId,
+    });
 
-    if (!user) {
-      return ResponseService.errorMessage(
-        res,
-        HttpStatus.NOT_FOUND,
-        "Cant find user"
-      );
+    if (dictionary) {
+      word.createdBy = userId;
+      word.knowledgeLevel = 0;
+
+      const newWord = await WordModel.create(word);
+
+      dictionary.dictionary.push(newWord._id);
+      dictionary.save();
+
+      Response.success(res, newWord);
     }
 
-    user.dictionary.push(newWord);
-    user.save();
-
-    ResponseService.success(res, {
-      dictionary: user.dictionary,
-    });
+    return Response.errorMessage(res, HttpStatus.NOT_FOUND, NotFound);
   } catch (err) {
     next(err);
   }
 };
 
-export default addWordController;
+export default addWord;
