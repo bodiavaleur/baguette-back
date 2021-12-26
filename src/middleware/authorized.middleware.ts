@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import ResponseService from "~utils/ResponseService";
+import Response from "~utils/Response";
 import { HttpStatus } from "~config/errors";
 import { AuthErrorStrings } from "~config/strings/auth/errors";
 
@@ -9,13 +9,13 @@ const authorized: RequestHandler = (req, res, next) => {
       return next();
     }
 
-    ResponseService.errorMessage(
+    Response.errorMessage(
       res,
       HttpStatus.NOT_AUTHORIZED,
       AuthErrorStrings.AuthFailure
     );
   } catch (err) {
-    ResponseService.error(res, HttpStatus.NOT_FOUND);
+    Response.error(res, HttpStatus.NOT_FOUND);
   }
 };
 

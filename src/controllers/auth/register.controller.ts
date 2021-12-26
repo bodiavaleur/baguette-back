@@ -1,31 +1,33 @@
 import type { RequestHandler } from "express";
 import UserModel from "~models/User";
-import ResponseService from "~utils/ResponseService";
+import Response from "~utils/Response";
 import { HttpStatus } from "~config/errors";
+import DictionaryModel from "~models/Dictionary";
+import { AuthErrorStrings } from "~config/strings/auth/errors";
 
 const registerController: RequestHandler = async (req, res, next) => {
   try {
-    const userData = { ...req.body, dictionary: [] };
+    const { email, username, password } = req.body;
 
     const existedUser = await UserModel.findOne({
-      $or: [{ email: userData.email }, { username: userData.username }],
+      $or: [{ email }, { username }],
     });
 
     if (!existedUser) {
-      const newUser = await UserModel.create(userData);
+      const newUser = await UserModel.create({ email, username, password });
       const accessToken = newUser.generateAccessToken();
 
-      const { _id, email, username } = newUser.toObject();
+      const userData = newUser.toObject();
 
-      const user = { _id, email, username };
+      await DictionaryModel.create({ user: newUser._id, dictionary: [] });
 
-      return ResponseService.success(res, { user, accessToken });
+      return Response.success(res, { user: userData, accessToken });
     }
 
-    return ResponseService.errorMessage(
+    return Response.errorMessage(
       res,
       HttpStatus.BAD_REQUEST,
-      "Please try different email"
+      AuthErrorStrings.DifferentEmail
     );
   } catch (err) {
     next(err);

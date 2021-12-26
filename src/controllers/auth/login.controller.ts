@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import UserModel from "~models/User";
-import ResponseService from "~utils/ResponseService";
+import Response from "~utils/Response";
 import { HttpStatus } from "~config/errors";
 
 const loginController: RequestHandler = async (req, res, next) => {
@@ -15,15 +15,11 @@ const loginController: RequestHandler = async (req, res, next) => {
 
       const accessToken = user.generateAccessToken();
 
-      return ResponseService.success(res, { user: userData, accessToken });
+      return Response.success(res, { user: userData, accessToken });
     }
 
     if (!user || !validatedPassword) {
-      return ResponseService.errorMessage(
-        res,
-        HttpStatus.NOT_FOUND,
-        "user not found"
-      );
+      return Response.errorMessage(res, HttpStatus.NOT_FOUND, "user not found");
     }
   } catch (err) {
     next(err);

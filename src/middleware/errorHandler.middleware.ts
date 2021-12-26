@@ -1,5 +1,5 @@
 import { ErrorRequestHandler } from "express";
-import ResponseService from "~utils/ResponseService";
+import Response from "~utils/Response";
 
 const errorHandler: ErrorRequestHandler = (err, req, res) => {
   try {
@@ -7,16 +7,16 @@ const errorHandler: ErrorRequestHandler = (err, req, res) => {
 
     switch (true) {
       case error === "ValidationError":
-        return ResponseService.errorMessage(res, 400, err.message);
+        return Response.errorMessage(res, 400, err.message);
 
       case error === "SyntaxError":
-        return ResponseService.errorMessage(res, 400, "Invalid request body");
+        return Response.errorMessage(res, 400, "Invalid request body");
 
       default:
-        return ResponseService.errorMessage(res, 500, err.message);
+        return Response.errorMessage(res, 500, err.message);
     }
   } catch (err) {
-    ResponseService.errorMessage(res, 500, "Something went wrong");
+    Response.errorMessage(res, 500, "Something went wrong");
   }
 };
 

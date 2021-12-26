@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { Models } from "~config/models";
-import { WordDocument } from "~models/Word/types";
+import { Collections, Models } from "~config/models";
+import { WordDocument } from "./types";
 
 const { Word } = Models;
 
@@ -18,6 +18,10 @@ const WordSchema = new mongoose.Schema(
   }
 );
 
-const WordModel = mongoose.model<WordDocument>(Word, WordSchema);
+const WordModel = mongoose.model<WordDocument>(
+  Word,
+  WordSchema,
+  Collections.Words
+);
 
 export default WordModel;
