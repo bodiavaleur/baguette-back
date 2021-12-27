@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import { Collections, Models } from "~config/models";
-import { ACCESS_TOKEN_EXPIRE_TIME, Token } from "~config/token";
+import { Token } from "~config/token";
 import type { UserDocument } from "./types";
 import { config } from "~config/config";
 
@@ -31,7 +31,7 @@ export const UserSchema = new mongoose.Schema({
 
 UserSchema.methods.generateAccessToken = function () {
   const payload = { _id: this._id, type: Token.Access };
-  const expiresIn = ACCESS_TOKEN_EXPIRE_TIME;
+  const expiresIn = 60;
   const jwtKey = config.jwtSecret;
 
   return jwt.sign(payload, jwtKey, { expiresIn });

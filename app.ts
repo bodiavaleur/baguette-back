@@ -3,18 +3,13 @@ import express from "express";
 import mongoose from "mongoose";
 import RootRouter from "~routes/root.router";
 import errorHandler from "~middleware/errorHandler.middleware";
-import { config } from "~config/config";
-
 import "~types/express";
-import "~utils/strategies/local";
-
-import PassportSession from "~utils/PassportSession";
+import { config } from "~config/config";
 
 const app = express();
 
 app.use(express.json());
 
-PassportSession(app);
 RootRouter(app);
 
 app.use(errorHandler);
