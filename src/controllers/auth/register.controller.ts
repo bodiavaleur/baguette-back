@@ -4,6 +4,7 @@ import Response from "~utils/Response";
 import { HttpStatus } from "~config/errors";
 import DictionaryModel from "~models/Dictionary";
 import { AuthErrorStrings } from "~config/strings/auth/errors";
+import { DictionaryStrings } from "~config/strings/dictionary/dictionary";
 
 const registerController: RequestHandler = async (req, res, next) => {
   try {
@@ -19,7 +20,13 @@ const registerController: RequestHandler = async (req, res, next) => {
 
       const userData = newUser.toObject();
 
-      await DictionaryModel.create({ user: newUser._id, dictionary: [] });
+      await DictionaryModel.create({
+        user: newUser._id,
+        dictionary: [],
+        name: DictionaryStrings.DefaultDictionary,
+        description: "",
+        image: "",
+      });
 
       return Response.success(res, { user: userData, accessToken });
     }

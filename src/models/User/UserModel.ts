@@ -31,7 +31,7 @@ export const UserSchema = new mongoose.Schema({
 
 UserSchema.methods.generateAccessToken = function () {
   const payload = { _id: this._id, type: Token.Access };
-  const expiresIn = 60;
+  const expiresIn = Number(config.accessTokenExpireHours) * 60 * 60;
   const jwtKey = config.jwtSecret;
 
   return jwt.sign(payload, jwtKey, { expiresIn });

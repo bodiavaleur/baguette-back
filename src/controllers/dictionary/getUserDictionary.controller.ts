@@ -7,11 +7,12 @@ import DictionaryModel from "~models/Dictionary";
 const getUserDictionary: RequestHandler = async (req, res, next) => {
   try {
     const userId = req.user?._id;
-    const dictionary = await DictionaryModel.findOne({ user: userId });
+    const dictionary = await DictionaryModel.find({ user: userId }).populate({
+      path: "dictionary",
+    });
 
     if (dictionary) {
-      const dictionaryWithWords = await dictionary.populate("dictionary");
-      return Response.success(res, dictionaryWithWords);
+      return Response.success(res, dictionary);
     } else {
       return Response.errorMessage(
         res,

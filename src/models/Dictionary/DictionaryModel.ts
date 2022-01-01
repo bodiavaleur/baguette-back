@@ -12,6 +12,16 @@ const DictionarySchema = new mongoose.Schema(
       auto: true,
     },
     user: ObjectId,
+    name: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+    },
+    image: {
+      type: String,
+    },
     dictionary: {
       type: [ObjectId],
       ref: Word,
