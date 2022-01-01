@@ -7,7 +7,7 @@ const { Word } = Models;
 const WordSchema = new mongoose.Schema(
   {
     word: String,
-    translation: String,
+    translations: [String],
     image: String,
     example: String,
     knowledgeLevel: Number,
