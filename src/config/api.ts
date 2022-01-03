@@ -18,6 +18,7 @@ export const DICTIONARY_API = {
   USER_DICTIONARY: `${BASE_URL}dictionary/user/`,
   CREATE: `${BASE_URL}dictionary/create/`,
   EDIT: `${BASE_URL}dictionary/edit/`,
+  GET_BY_ID: `${BASE_URL}dictionary/`,
 };
 
 export const WHITELIST_AUTH_ENDPOINTS = [AUTH_API.LOGIN, AUTH_API.REGISTER];
