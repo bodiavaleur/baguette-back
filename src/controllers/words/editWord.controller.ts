@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import WordModel from "~models/Word";
-import Response from "~utils/Response";
+import ResponseService from "~utils/ResponseService";
 import { HttpStatus } from "~config/errors";
 import { WordsErrorStrings } from "~config/strings/words/errors";
 
@@ -17,10 +17,14 @@ const editWord: RequestHandler = async (req, res, next) => {
     if (word) {
       const updatedWord = await WordModel.findOne(filters);
 
-      return Response.success(res, updatedWord);
+      return ResponseService.success(res, updatedWord);
     }
 
-    return Response.errorMessage(res, HttpStatus.NOT_FOUND, WordNotFound);
+    return ResponseService.errorMessage(
+      res,
+      HttpStatus.NOT_FOUND,
+      WordNotFound
+    );
   } catch (err) {
     next(err);
   }

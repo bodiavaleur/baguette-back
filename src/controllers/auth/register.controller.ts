@@ -1,6 +1,6 @@
 import type { RequestHandler } from "express";
 import UserModel from "~models/User";
-import Response from "~utils/Response";
+import ResponseService from "~utils/ResponseService";
 import { HttpStatus } from "~config/errors";
 import DictionaryModel from "~models/Dictionary";
 import { AuthErrorStrings } from "~config/strings/auth/errors";
@@ -28,10 +28,10 @@ const registerController: RequestHandler = async (req, res, next) => {
         image: "",
       });
 
-      return Response.success(res, { user: userData, accessToken });
+      return ResponseService.success(res, { user: userData, accessToken });
     }
 
-    return Response.errorMessage(
+    return ResponseService.errorMessage(
       res,
       HttpStatus.BAD_REQUEST,
       AuthErrorStrings.DifferentEmail

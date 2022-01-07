@@ -12,6 +12,7 @@ export const WORDS_API = {
   DELETE: `${BASE_URL}word/delete/`,
   WORD_DETAILS: `${BASE_URL}word/`,
   USER_WORDS: `${BASE_URL}words/user/`,
+  UPLOAD_IMAGE: `${BASE_URL}word/image`,
 };
 
 export const DICTIONARY_API = {

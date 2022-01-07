@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import Response from "~utils/Response";
+import ResponseService from "~utils/ResponseService";
 import { HttpStatus } from "~config/errors";
 import { AuthErrorStrings } from "~config/strings/auth/errors";
 import { WHITELIST_AUTH_ENDPOINTS } from "~config/api";
@@ -19,7 +19,7 @@ const authorized: RequestHandler = (req, res, next) => {
     if (token) {
       return jwt.verify(token, config.jwtSecret, async (err, jwtUser) => {
         if (err) {
-          return Response.errorMessage(
+          return ResponseService.errorMessage(
             res,
             HttpStatus.NOT_AUTHORIZED,
             AuthErrorStrings.AuthFailure
@@ -32,13 +32,13 @@ const authorized: RequestHandler = (req, res, next) => {
       });
     }
 
-    Response.errorMessage(
+    ResponseService.errorMessage(
       res,
       HttpStatus.NOT_AUTHORIZED,
       AuthErrorStrings.AuthFailure
     );
   } catch (err) {
-    Response.error(res, HttpStatus.NOT_FOUND);
+    ResponseService.error(res, HttpStatus.NOT_FOUND);
   }
 };
 

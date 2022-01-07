@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import Response from "~utils/Response";
+import ResponseService from "~utils/ResponseService";
 import DictionaryModel from "~models/Dictionary";
 import { HttpStatus } from "~config/errors";
 import { WordsErrorStrings } from "~config/strings/words/errors";
@@ -18,10 +18,10 @@ const editDictionary: RequestHandler = async (req, res, next) => {
 
     if (dictionary) {
       const updatedDictionary = await DictionaryModel.findOne(filter);
-      return Response.success(res, updatedDictionary);
+      return ResponseService.success(res, updatedDictionary);
     }
 
-    return Response.errorMessage(
+    return ResponseService.errorMessage(
       res,
       HttpStatus.NOT_FOUND,
       WordsErrorStrings.NoDictionaryFound

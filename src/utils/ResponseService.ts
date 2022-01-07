@@ -15,6 +15,6 @@ class ResponseBase {
   }
 }
 
-const Response = new ResponseBase();
+const ResponseService = new ResponseBase();
 
-export default Response;
+export default ResponseService;

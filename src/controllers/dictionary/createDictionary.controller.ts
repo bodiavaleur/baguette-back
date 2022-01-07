@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import Response from "~utils/Response";
+import ResponseService from "~utils/ResponseService";
 import DictionaryModel from "~models/Dictionary";
 
 const createDictionary: RequestHandler = async (req, res, next) => {
@@ -16,7 +16,7 @@ const createDictionary: RequestHandler = async (req, res, next) => {
 
     const newDictionary = await DictionaryModel.create(newDictionaryFields);
 
-    return Response.success(res, newDictionary);
+    return ResponseService.success(res, newDictionary);
   } catch (err) {
     next(err);
   }

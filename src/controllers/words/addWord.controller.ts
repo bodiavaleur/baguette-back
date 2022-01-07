@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import Response from "~utils/Response";
+import ResponseService from "~utils/ResponseService";
 import { HttpStatus } from "~config/errors";
 import WordModel from "~models/Word";
 import DictionaryModel from "~models/Dictionary";
@@ -26,10 +26,10 @@ const addWord: RequestHandler = async (req, res, next) => {
       dictionary.dictionary.push(newWord._id);
       dictionary.save();
 
-      Response.success(res, newWord);
+      ResponseService.success(res, newWord);
     }
 
-    return Response.errorMessage(res, HttpStatus.NOT_FOUND, NotFound);
+    return ResponseService.errorMessage(res, HttpStatus.NOT_FOUND, NotFound);
   } catch (err) {
     next(err);
   }
