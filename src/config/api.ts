@@ -12,7 +12,7 @@ export const WORDS_API = {
   DELETE: `${BASE_URL}word/delete/`,
   WORD_DETAILS: `${BASE_URL}word/`,
   USER_WORDS: `${BASE_URL}words/user/`,
-  UPLOAD_IMAGE: `${BASE_URL}word/image`,
+  UPLOAD_IMAGE: `${BASE_URL}word/image/`,
 };
 
 export const DICTIONARY_API = {
@@ -20,6 +20,7 @@ export const DICTIONARY_API = {
   CREATE: `${BASE_URL}dictionary/create/`,
   EDIT: `${BASE_URL}dictionary/edit/`,
   GET_BY_ID: `${BASE_URL}dictionary/`,
+  UPLOAD_IMAGE: `${BASE_URL}dictionary/image/`,
 };
 
 export const WHITELIST_AUTH_ENDPOINTS = [AUTH_API.LOGIN, AUTH_API.REGISTER];
