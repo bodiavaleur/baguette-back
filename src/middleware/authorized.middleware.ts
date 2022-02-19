@@ -3,9 +3,10 @@ import ResponseService from "~utils/ResponseService";
 import { HttpStatus } from "~config/errors";
 import { AuthErrorStrings } from "~config/strings/auth/errors";
 import { WHITELIST_AUTH_ENDPOINTS } from "~config/api";
-import jwt from "jsonwebtoken";
+import jwt, {JwtPayload} from "jsonwebtoken";
 import { config } from "~config/config";
 import UserModel from "~models/User";
+import {UserDocument} from "~models/User/types";
 
 const authorized: RequestHandler = (req, res, next) => {
   try {
@@ -26,7 +27,8 @@ const authorized: RequestHandler = (req, res, next) => {
           );
         }
 
-        req.user = await UserModel.findById(jwtUser?._id);
+        const user = jwtUser as UserDocument
+        req.user = await UserModel.findById(user?._id);
 
         next();
       });

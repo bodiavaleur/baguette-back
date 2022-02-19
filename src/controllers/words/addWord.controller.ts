@@ -23,7 +23,7 @@ const addWord: RequestHandler = async (req, res, next) => {
 
       const newWord = await WordModel.create(word);
 
-      dictionary.dictionary.push(newWord._id);
+      dictionary.dictionary.push(newWord?._id);
       dictionary.save();
 
       ResponseService.success(res, newWord);

@@ -37,7 +37,7 @@ UserSchema.methods.generateAccessToken = function () {
   return jwt.sign(payload, jwtKey, { expiresIn });
 };
 
-UserSchema.methods.validatePassword = function (password) {
+UserSchema.methods.validatePassword = function (password: string) {
   return this.password === password;
 };
 
