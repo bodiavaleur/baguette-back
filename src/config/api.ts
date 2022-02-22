@@ -15,6 +15,10 @@ export const WORDS_API = {
   UPLOAD_IMAGE: `${BASE_URL}word/image/`,
 };
 
+export const TRAINING_API = {
+  FLASHCARD: `${BASE_URL}training/flashcard/`,
+};
+
 export const DICTIONARY_API = {
   USER_DICTIONARY: `${BASE_URL}dictionary/user/`,
   CREATE: `${BASE_URL}dictionary/create/`,
