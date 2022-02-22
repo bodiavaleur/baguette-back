@@ -21,6 +21,7 @@ export const DICTIONARY_API = {
   EDIT: `${BASE_URL}dictionary/edit/`,
   GET_BY_ID: `${BASE_URL}dictionary/`,
   UPLOAD_IMAGE: `${BASE_URL}dictionary/image/`,
+  GET_STATS: `${BASE_URL}dictionary/stats/`,
 };
 
 export const WHITELIST_AUTH_ENDPOINTS = [AUTH_API.LOGIN, AUTH_API.REGISTER];
