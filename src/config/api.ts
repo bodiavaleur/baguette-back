@@ -6,11 +6,12 @@ export const AUTH_API = {
 };
 
 export const WORDS_API = {
-  ADD: `${BASE_URL}word/add/`,
-  EDIT: `${BASE_URL}word/edit/`,
-  DELETE: `${BASE_URL}word/delete/`,
-  WORD_DETAILS: `${BASE_URL}word/`,
-  UPLOAD_IMAGE: `${BASE_URL}word/image/`,
+  ADD: `${BASE_URL}words/add/`,
+  EDIT: `${BASE_URL}words/edit/`,
+  DELETE: `${BASE_URL}words/delete/`,
+  WORD_DETAILS: `${BASE_URL}words/`,
+  UPLOAD_IMAGE: `${BASE_URL}words/image/`,
+  GET_MY_WORDS: `${BASE_URL}words/my/`,
 };
 
 export const TRAINING_API = {
@@ -18,13 +19,13 @@ export const TRAINING_API = {
 };
 
 export const DICTIONARY_API = {
-  USER_DICTIONARY: `${BASE_URL}dictionary/user/`,
-  CREATE: `${BASE_URL}dictionary/create/`,
-  EDIT: `${BASE_URL}dictionary/edit/`,
-  GET_BY_ID: `${BASE_URL}dictionary/`,
-  UPLOAD_IMAGE: `${BASE_URL}dictionary/image/`,
-  GET_STATS: `${BASE_URL}dictionary/stats/`,
-  GET_WORDS: `${BASE_URL}dictionary/words/`,
+  GET_MY_DICTIONARIES: `${BASE_URL}dictionaries/my/`,
+  CREATE: `${BASE_URL}dictionaries/create/`,
+  EDIT: `${BASE_URL}dictionaries/edit/`,
+  GET_BY_ID: `${BASE_URL}dictionaries/`,
+  UPLOAD_IMAGE: `${BASE_URL}dictionaries/image/`,
+  GET_STATS: `${BASE_URL}dictionaries/stats/`,
+  GET_WORDS: `${BASE_URL}dictionaries/words/`,
 };
 
 export const WHITELIST_AUTH_ENDPOINTS = [AUTH_API.LOGIN, AUTH_API.REGISTER];

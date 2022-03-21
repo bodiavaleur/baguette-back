@@ -7,14 +7,17 @@ import editWord from "~controllers/words/editWord.controller";
 import deleteWord from "~controllers/words/deleteWord.controller";
 import uploadWordImage from "~controllers/words/uploadWordImage.controller";
 import uploadS3 from "~middleware/uploadS3.middleware";
+import getMyWords from "~controllers/words/getMyWords.controller";
 import { BUCKETS } from "~config/s3";
 
-const { WORD_DETAILS, ADD, EDIT, DELETE, UPLOAD_IMAGE } = WORDS_API;
+const { WORD_DETAILS, GET_MY_WORDS, ADD, EDIT, DELETE, UPLOAD_IMAGE } =
+  WORDS_API;
 
 const WordsRouter = () => {
   const route = Router();
 
   route.get(WORD_DETAILS, authorized, getWordById);
+  route.get(GET_MY_WORDS, authorized, getMyWords);
   route.post(ADD, authorized, addWord);
   route.put(EDIT, authorized, editWord);
   route.delete(DELETE, authorized, deleteWord);

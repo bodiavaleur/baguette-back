@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { DICTIONARY_API } from "~config/api";
 import authorized from "~middleware/authorized.middleware";
-import getUserDictionary from "~controllers/dictionary/getUserDictionary.controller";
+import getMyDictionaries from "~controllers/dictionary/getMyDictionaries.controller";
 import createDictionary from "~controllers/dictionary/createDictionary.controller";
 import editDictionary from "~controllers/dictionary/editDictionary.controller";
 import getDictionaryById from "~controllers/dictionary/getDictionaryById.controller";
@@ -12,7 +12,7 @@ import getDictionaryWords from "~controllers/dictionary/getDictionaryWords.contr
 import { BUCKETS } from "~config/s3";
 
 const {
-  USER_DICTIONARY,
+  GET_MY_DICTIONARIES,
   GET_BY_ID,
   CREATE,
   EDIT,
@@ -24,7 +24,7 @@ const {
 const DictionaryRouter = () => {
   const route = Router();
 
-  route.get(USER_DICTIONARY, authorized, getUserDictionary);
+  route.get(GET_MY_DICTIONARIES, authorized, getMyDictionaries);
   route.get(GET_BY_ID, authorized, getDictionaryById);
   route.get(GET_STATS, authorized, getDictionaryStats);
   route.get(GET_WORDS, authorized, getDictionaryWords);
