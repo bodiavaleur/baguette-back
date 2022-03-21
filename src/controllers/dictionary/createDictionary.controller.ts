@@ -8,7 +8,6 @@ const createDictionary: RequestHandler = async (req, res, next) => {
     const { name, description, image } = req.body;
     const newDictionaryFields = {
       user: userId,
-      dictionary: [],
       name,
       description,
       image,

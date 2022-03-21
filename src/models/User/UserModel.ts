@@ -5,29 +5,34 @@ import { Token } from "~config/token";
 import type { UserDocument } from "./types";
 import { config } from "~config/config";
 
-const { User, Word } = Models;
+const { User } = Models;
 const { ObjectId } = mongoose.Schema.Types;
 
-export const UserSchema = new mongoose.Schema({
-  _id: {
-    type: ObjectId,
-    auto: true,
+export const UserSchema = new mongoose.Schema(
+  {
+    _id: {
+      type: ObjectId,
+      auto: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-});
+  {
+    versionKey: false,
+  }
+);
 
 UserSchema.methods.generateAccessToken = function () {
   const payload = { _id: this._id, type: Token.Access };

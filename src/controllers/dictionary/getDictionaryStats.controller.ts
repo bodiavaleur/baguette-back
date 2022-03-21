@@ -2,23 +2,21 @@ import { RequestHandler } from "express";
 import ResponseService from "~utils/ResponseService";
 import { HttpStatus } from "~config/errors";
 import { WordsErrorStrings } from "~config/strings/words/errors";
-import DictionaryModel from "~models/Dictionary";
 import { isNewWord, isWordLearned, isWordStudying } from "~helpers/words";
+import WordModel from "~models/Word";
 
 const getDictionaryStats: RequestHandler = async (req, res, next) => {
   try {
     const userId = req.user?._id;
     const { dictionaryId } = req.query;
-    const query = { _id: dictionaryId, user: userId };
+    const query = { dictionaryId, createdBy: userId };
 
-    const dictionary = await DictionaryModel.findOne(query).populate({
-      path: "dictionary",
-    });
+    const words = await WordModel.find(query);
 
-    if (dictionary) {
-      const newWords = dictionary.dictionary.filter(isNewWord);
-      const studyingWords = dictionary.dictionary.filter(isWordStudying);
-      const learnedWords = dictionary.dictionary.filter(isWordLearned);
+    if (words) {
+      const newWords = words.filter(isNewWord);
+      const studyingWords = words.filter(isWordStudying);
+      const learnedWords = words.filter(isWordLearned);
 
       return ResponseService.success(res, {
         newCount: newWords.length,

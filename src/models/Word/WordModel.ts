@@ -1,8 +1,10 @@
-import mongoose from "mongoose";
+import mongoose, { PaginateModel } from "mongoose";
+import paginate from "mongoose-paginate-v2";
 import { Collections, Models } from "~config/models";
 import { WordDocument } from "./types";
 
 const { Word } = Models;
+const { ObjectId } = mongoose.Schema.Types;
 
 const WordSchema = new mongoose.Schema(
   {
@@ -11,14 +13,18 @@ const WordSchema = new mongoose.Schema(
     image: String,
     example: String,
     knowledgeLevel: Number,
-    createdBy: String,
+    createdBy: ObjectId,
+    dictionaryId: ObjectId,
   },
   {
     timestamps: true,
+    versionKey: false,
   }
 );
 
-const WordModel = mongoose.model<WordDocument>(
+WordSchema.plugin(paginate);
+
+const WordModel = mongoose.model<WordDocument, PaginateModel<WordDocument>>(
   Word,
   WordSchema,
   Collections.Words

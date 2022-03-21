@@ -3,7 +3,7 @@ import { Collections, Models } from "~config/models";
 import { DictionaryDocument } from "./types";
 
 const { ObjectId } = mongoose.Schema.Types;
-const { Dictionary, Word } = Models;
+const { Dictionary } = Models;
 
 const DictionarySchema = new mongoose.Schema(
   {
@@ -22,13 +22,10 @@ const DictionarySchema = new mongoose.Schema(
     image: {
       type: String,
     },
-    dictionary: {
-      type: [ObjectId],
-      ref: Word,
-    },
   },
   {
     timestamps: true,
+    versionKey: false,
   }
 );
 

@@ -19,12 +19,10 @@ const addWord: RequestHandler = async (req, res, next) => {
 
     if (dictionary) {
       word.createdBy = userId;
+      word.dictionaryId = dictionaryId;
       word.knowledgeLevel = 0;
 
       const newWord = await WordModel.create(word);
-
-      dictionary.dictionary.push(newWord?._id);
-      dictionary.save();
 
       ResponseService.success(res, newWord);
     }

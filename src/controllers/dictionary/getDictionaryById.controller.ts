@@ -7,9 +7,7 @@ import DictionaryModel from "~models/Dictionary";
 const getDictionaryById: RequestHandler = async (req, res, next) => {
   try {
     const { dictionaryId } = req.query;
-    const dictionary = await DictionaryModel.findById(dictionaryId).populate(
-      "dictionary"
-    );
+    const dictionary = await DictionaryModel.findById(dictionaryId);
 
     if (dictionary) {
       return ResponseService.success(res, dictionary);

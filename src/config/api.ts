@@ -6,12 +6,10 @@ export const AUTH_API = {
 };
 
 export const WORDS_API = {
-  GET_WORDS: `${BASE_URL}words/`,
   ADD: `${BASE_URL}word/add/`,
   EDIT: `${BASE_URL}word/edit/`,
   DELETE: `${BASE_URL}word/delete/`,
   WORD_DETAILS: `${BASE_URL}word/`,
-  USER_WORDS: `${BASE_URL}words/user/`,
   UPLOAD_IMAGE: `${BASE_URL}word/image/`,
 };
 
@@ -26,6 +24,7 @@ export const DICTIONARY_API = {
   GET_BY_ID: `${BASE_URL}dictionary/`,
   UPLOAD_IMAGE: `${BASE_URL}dictionary/image/`,
   GET_STATS: `${BASE_URL}dictionary/stats/`,
+  GET_WORDS: `${BASE_URL}dictionary/words/`,
 };
 
 export const WHITELIST_AUTH_ENDPOINTS = [AUTH_API.LOGIN, AUTH_API.REGISTER];
