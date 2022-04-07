@@ -2,6 +2,7 @@ import mongoose, { PaginateModel } from "mongoose";
 import paginate from "mongoose-paginate-v2";
 import { Collections, Models } from "~config/models";
 import { WordDocument } from "./types";
+import { WordType } from "~config/words";
 
 const { Word } = Models;
 const { ObjectId } = mongoose.Schema.Types;
@@ -15,6 +16,11 @@ const WordSchema = new mongoose.Schema(
     knowledgeLevel: Number,
     createdBy: ObjectId,
     dictionaryId: ObjectId,
+    wordType: {
+      type: String,
+      enum: WordType,
+      default: WordType.Word,
+    },
   },
   {
     timestamps: true,
