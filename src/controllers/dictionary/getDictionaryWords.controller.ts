@@ -15,8 +15,12 @@ const getDictionaryWords: RequestHandler = async (req, res, next) => {
       createdBy: userId,
       ...(wordType && { wordType }),
     };
+    const sort = { createdAt: -1 };
 
-    const words = await WordModel.paginate(query, paginateOptions(page));
+    const words = await WordModel.paginate(
+      query,
+      paginateOptions(page, { sort })
+    );
 
     return ResponseService.success(res, words);
   } catch (err) {
