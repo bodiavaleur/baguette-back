@@ -1,6 +1,9 @@
-import mongoose from "mongoose";
+import mongoose, { PaginateModel } from "mongoose";
+import paginate from "mongoose-paginate-v2";
 import { Collections, Models } from "~config/models";
 import { DictionaryDocument } from "./types";
+import { Language } from "~config/language";
+import { WordDocument } from "~models/Word/types";
 
 const { ObjectId } = mongoose.Schema.Types;
 const { Dictionary } = Models;
@@ -22,6 +25,11 @@ const DictionarySchema = new mongoose.Schema(
     image: {
       type: String,
     },
+    language: {
+      type: String,
+      enum: Language,
+      default: Language.English,
+    },
   },
   {
     timestamps: true,
@@ -29,10 +37,11 @@ const DictionarySchema = new mongoose.Schema(
   }
 );
 
-const DictionaryModel = mongoose.model<DictionaryDocument>(
-  Dictionary,
-  DictionarySchema,
-  Collections.Dictionaries
-);
+DictionarySchema.plugin(paginate);
+
+const DictionaryModel = mongoose.model<
+  DictionaryDocument,
+  PaginateModel<WordDocument>
+>(Dictionary, DictionarySchema, Collections.Dictionaries);
 
 export default DictionaryModel;
